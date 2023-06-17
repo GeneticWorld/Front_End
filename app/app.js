@@ -10,7 +10,7 @@ import route from "./routes/home.routes.js"
 import dash from './routes/dashboard.routes.js';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
-import dashLab from './routes/editLab.routes.js';
+import dashLaboratory from './routes/lab.routes.js';
 import dashEmail from './routes/email.routes.js';
 // import dashPqrs from './routes/pqrs.routes.js';
 // import dashAppointment from './routes/appointment.routes.js';
@@ -49,7 +49,7 @@ app.use("/auth", passport.authenticate("auth-google", {
 app.use("/", route);
 app.use("/viewEmail", dashEmail);
 app.use("/v1", dash);
-app.use("/lab", dashLab);
+app.use("/viewLab", dashLaboratory);
 
 
 // SE CAPTURA EL PUERTO QUE SE ENVUENTRA EN LOS AMBIENTES

@@ -52,12 +52,9 @@
             <tbody>
              <% datos.forEach((elements) => { %>
             <tr role="row" class="odd">
-              <td><%= elements.ID %></td>
-              <td><%= elements.NAME %></td>
-              <td>
-
-                  <!-- href="Borrar?id=<%=elements.ID %>"  -->
-              </td>
+              <td><%= elements.id %></td>
+              <td><%= elements.laboratory %></td>
+              <td><%= elements.status %></td>
               <td>
                 <a href="editLab?id=<%= elements.ID %>&name=<%= elements.NAME %>" class="btn btn-warning">
                   <i class="fa fa-edit"></i>

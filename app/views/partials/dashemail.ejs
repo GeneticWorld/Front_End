@@ -52,7 +52,7 @@
             <td><%= elements.id %></td>
             <td><%= elements.email %></td>
             <td>
-              <a href="edit-user?id=<%= elements.ID %>&name=<%= elements.NAME %>" class="btn btn-warning">
+              <a href="editEmail?id=<%= elements.id %>&email=<%= elements.email %>" class="btn btn-warning">
                 <i class="fa fa-edit"></i>
               </a>
 
@@ -74,7 +74,7 @@
   <div class="modal modal-info fade" id="modal-info">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="save" method="POST">
+        <form name="formulario" id="formulario" action="saveEmail" method="POST">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
@@ -88,7 +88,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
-          <button type="submit" class="btn btn-outline">Guardar</button>
+          <button onclick="add()" type="submit" class="btn btn-outline">Guardar</button>
         </div>
       </form>
       </div>
@@ -118,4 +118,26 @@ if (result.isConfirmed) {
 }
 })
 }
+function add() {
+  const form = document.querySelector("#formulario");
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+        Swal.fire({
+        title: 'Estas seguro de guardar el siguiente correo?',
+          text: "Agregaras el correo",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Guardar!'
+}).then((result) => {
+    if (result.isConfirmed) {
+      form.submit();
+        Swal.fire(
+          'Actualizado!',
+          'Su correo se actualizo.',
+          'success')}
+      })
+      })
+      }
 </script>

@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import dashEmail from "../routes/email.routes.js";
+
 
 dotenv.config()
 
@@ -35,57 +35,10 @@ export const getEmail = async (req, res) => {
             res.redirect("/");
 
         }
-        res.render("dash");
     } else {
         res.redirect("/")
     }
 }
-
-//  export const emailSave = (req, res)=> {
-//     if(req.body.email){
-
-//         let data ={
-//             email : req.body.email
-//         }
-
-//         let metodo = "post";
-
-//         if (req.body.id) {
-//             data = {
-//                 id: req.body.id,
-//                 email: req.body.email
-//             }
-//             metodo = "put";
-//         }
-
-
-//        // let data = {name:req.body.name};
-//         let ruta =  "http://localhost:3000/api/email";
-        
-
-//         let option = {
-//             method : metodo,
-//             headers:{
-//                 "content-type": "application/json"
-//             },
-//             body: JSON.stringify(data)
-//         }
-//         try {
-//             const result = fetch(ruta, option)
-//             .then(res=>res.json())
-//             .then(data=>
-//                 console.log("Datos guardados"
-//                 ))
-//                 .catch(error => console.log("error al consumir la API" + err))
-//                 res.redirect("/viewEmail/email");
-//         }catch(error){
-
-//         }
-
-//         res.send("se ha guardado")
-//     }
-// };
-
 
 export const save = (req, res) => {
     if(req.body.email){
@@ -94,6 +47,14 @@ export const save = (req, res) => {
             email: req.body.email
         };
         let metodo = "POST";
+
+        if(req.body.id){
+            data = {
+                id: req.body.id,
+                email: req.body.email
+            };
+            metodo = "put"
+        }
 
         let ruta = "http://localhost:3000/api/email";
         let option = {
@@ -119,6 +80,33 @@ export const save = (req, res) => {
     }else{
         console.send("Este es el error: " );
     }
+}
+
+export const emailEdit = (req, res)=>{
+    const id = req.query.id;
+    const email = req.query.email;
+
+    let datos = {
+        id: id,
+        email: email
+    }
+
+
+    if (req.cookies.ckeib){
+        try {
+            const token = jwt.verify(
+            req.cookies.ckeib,
+            process.env.SECRET_KEY)
+            res.render("dash",{
+                "nombre" : token.nombre,
+                "foto" : token.foto,
+                "menu" : 4,
+                "datos" : datos
+            })
+        }catch(error){
+            console.error("error con el token");
+    }
+}
 }
 
 
@@ -152,3 +140,4 @@ export const emailDelete = async(req, res)=>{
     }
     }
 }
+

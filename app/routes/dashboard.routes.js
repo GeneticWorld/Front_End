@@ -20,47 +20,46 @@ dash.get("/inicio", (req, res)=>{
             res.redirect("/");
             
         }
-    res.render("dash");
 }else{
     res.redirect("/")
 }    
 })
 
-dash.get("/laboratorio", async(req, res)=>{
-    if (req.cookies.ckeib){
-        try {
-            const token = jwt.verify(req.cookies.ckeib, process.env.SECRET_KEY)
+// dash.get("/laboratorio", async(req, res)=>{
+//     if (req.cookies.ckeib){
+//         try {
+//             const token = jwt.verify(req.cookies.ckeib, process.env.SECRET_KEY)
 
-             let ruta = "http://localhost:3000/api/user";
-             let option = {
-                 method: "GET"
-            }
-            let datos = {};
-            const result = await fetch(ruta, option)
-            .then(response => response.json())
-            .then(data => {
-                datos = data[0]
-                //console.log(data[0]);
-            })
-            .catch(error => console.error("Error en peticion: " + error ))
+//              let ruta = "http://localhost:3000/api/user";
+//              let option = {
+//                  method: "GET"
+//             }
+//             let datos = {};
+//             const result = await fetch(ruta, option)
+//             .then(response => response.json())
+//             .then(data => {
+//                 datos = data[0]
+//                 //console.log(data[0]);
+//             })
+//             .catch(error => console.error("Error en peticion: " + error ))
 
 
-                res.render("dash", {
-                "nombre" : token.nombre,
-                "foto": token.foto,
-                "menu" : 5,
-                "datos" : datos
-             });
+//                 res.render("dash", {
+//                 "nombre" : token.nombre,
+//                 "foto": token.foto,
+//                 "menu" : 5,
+//                 "datos" : datos
+//              });
 
-        } catch (error) {
-            res.redirect("/");
+//         } catch (error) {
+//             res.redirect("/");
             
-        }
-    res.render("dash");
-}else{
-    res.redirect("/")
-}    
-})
+//         }
+//     res.render("dash");
+// }else{
+//     res.redirect("/")
+// }    
+// })
 
 dash.get("/editLab",(req, res)=>{
     const id = req.query.id;
@@ -213,7 +212,7 @@ dash.get("/edit-user",(req, res)=>{
             res.render("dash",{
                 "nombre" : token.nombre,
                 "foto" : token.foto,
-                "menu" : 4,
+                "menu" : 8,
                 "datos" : datos
             })
         }catch(error){

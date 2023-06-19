@@ -125,16 +125,13 @@ export const emailDelete = async(req, res)=>{
             const result =  await fetch(url, option)
             .then(response=>response.json())
             .then(data=>{
-               if (data[0].affecteRows==1){
+               if (data.affecteRows==1){
                 console.log("borrado");
                }else{
                 console.log("no borro");
                }
             })
-            
-
             res.redirect("/viewEmail/email")
-
         }catch(error){
             console.error("error con el token");
     }

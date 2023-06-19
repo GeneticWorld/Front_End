@@ -7,7 +7,9 @@ dotenv.config();
 const dashLaboratory = Router ();
 
 dashLaboratory.get("/lab",controllers.viewLab);
-
+dashLaboratory.post("/labeSave", controllers.saveLab);
+dashLaboratory.get("/editLab", controllers.labEdit);
+dashLaboratory.get("/deleteLab", controllers.labDelete);
 
 export default dashLaboratory;
 

@@ -1,48 +1,156 @@
 <div class="content-wrapper">
-  <!-- <div class="content-wrapper">
-     Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        PQRS
-        <small></small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="/v1/inicio"><i class="fa fa-home"></i>Home</a></li>
-      </ol>
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      PQRS
+      <small></small>
+    </h1>
+    <ol class="breadcrumb">
+      <li><a href="/v1/inicio"><i class="fa fa-home"></i>Home</a></li>
+    </ol>
+  </section>
 
-      <div class="box-body">
-        <!-- Cedula pqrs -->
-        <div class="form-group">
-          <label class="message-cedula">Cedula</label>
-          <div class="input-group my-colorpicker2 colorpicker-element">
-            <input type="text" class="form-control">
-          </div>
-          <!-- /.Close cedula pqrs -->
-        </div>
-          <!-- Name complet pqrs -->
-        <div class="form-group">
-        <label class="message-cedula">Nombre completo</label>
+  <div class="box-header with-border">
+    <h3 class="box-title">
 
-        <div class="input-group my-colorpicker2 colorpicker-element">
-          <input type="text" class="form-control">
-        </div>
-        <!-- /.Close cedula pqrs -->
-      </div>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info">
+        Registrar PQRS
+      </button>
+    </h3>
+
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
+              title="Collapse">
+        <i class="fa fa-minus"></i></button>
+      <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
+        <i class="fa fa-times"></i></button>
     </div>
-  
-    </section>
-    <!-- pqrs container -->
-    <section class="content">
+  </div>
 
-      <!-- Default box -->
-      <div class="box">
-        <div class="form-group"><center><label for="mensaje">Registro de PQRS</label></center><textarea class="form-control"
-          id="mensaje" rows="4"></textarea> </div> 
-          <center><button type="submit"
-            class="btn btn-primary">Enviar
-          </button></center>
+  <!-- Main content -->
+  <section class="content">
+
+    <!-- Default box -->
+    <div class="box">
+      <div class="box-body">
+        <div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+          <thead>
+          <tr role="row">
+          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+            Cedula
+          </th>
+          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+            Nombre
+          </th>
+          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+              Descripcion
+          </th>
+          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+            Opciones
+          </th>
+        </tr>
+          </thead>
+          <tbody>
+           <% datos.forEach((elements) => { %>
+          <tr role="row" class="odd">
+            <td><%= elements.cedula %></td>
+            <td><%= elements.nombre_completo %></td>
+            <td><%= elements.descripcion %></td>
+            <td>
+                <a
+                 class="btn btn-danger" onclick="confirmarpqrs(`<%=elements.cedula %>`);">
+                <i class="fa fa-trash"></i>
+                </a>
+                <!-- href="Borrar?id=<%=elements.ID %>"  -->
+            </td>
+            
+          </tr>
+          <% }) %>
+          
+        </table></div>
+      </div>
+      <!-- /.box-body -->
+  
+  </section>
+  <div class="modal modal-info fade" id="modal-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <form name="formulario" id="formulario" action="saveEmail" method="POST">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Ingrese PQRS</h4>
+        </div>
+        <div class="modal-body">
+          <div class="input-group">
+            <span class="input-group-addon">-</span>
+            <input name="cedula" type="text" class="form-control" placeholder="Ingrese cedula" required>
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">-</span>
+            <input name="nombre_completo" type="text" class="form-control" placeholder="Ingrese nombre">
+          </div>
+          <div class="input-group">
+            <span class="input-group-addon">-</span>
+            <input name="descripcion" type="text" class="form-control" placeholder="Ingrese descripcion">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
+          <button onclick="add()" type="submit" class="btn btn-outline">Guardar</button>
+        </div>
+      </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
 </div>
+<script>
+  function confirmarpqrs (cedula){
+    Swal.fire({
+title: 'Estas completamente seguro?',
+text: "Quieres eliminar el siguiente usuario?",
+icon: 'warning',
+showCancelButton: true,
+confirmButtonColor: '#3085d6',
+cancelButtonColor: '#d33',
+confirmButtonText: 'SI'
+}).then((result) => {
+if (result.isConfirmed) {
+  window.location.href=`deletePqrs?cedula=${cedula}`
+  Swal.fire(
+    'Eliminado!',
+    'Su registro ah sido eliminado corretamente',
+    'success'
+  )
+}
+})
+}
+
+function add() {
+  const form = document.querySelector("#formulario");
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+        Swal.fire({
+        title: 'Estas seguro de guardar el siguiente correo?',
+          text: "Agregaras el correo",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Guardar!'
+}).then((result) => {
+    if (result.isConfirmed) {
+      form.submit();
+        Swal.fire(
+          'Actualizado!',
+          'Su correo se actualizo.',
+          'success')}
+      })
+      })
+      }
+</script>
 
 
 

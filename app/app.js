@@ -12,7 +12,7 @@ import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import dashLaboratory from './routes/lab.routes.js';
 import dashEmail from './routes/email.routes.js';
-// import dashPqrs from './routes/pqrs.routes.js';
+import dashpqrs from './routes/pqrs.routes.js';
 // import dashAppointment from './routes/appointment.routes.js';
 // import dashInicio from './routes/inicio.routes.js';
 
@@ -50,6 +50,7 @@ app.use("/", route);
 app.use("/viewEmail", dashEmail);
 app.use("/v1", dash);
 app.use("/viewLab", dashLaboratory);
+app.use("/viewPqrs", dashpqrs);
 
 
 // SE CAPTURA EL PUERTO QUE SE ENVUENTRA EN LOS AMBIENTES

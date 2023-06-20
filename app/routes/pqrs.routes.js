@@ -1,8 +1,14 @@
 import { Router } from "express";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import fetch from "node-fetch";
+import * as controllers from "../controllers/pqrs.controllers.js";
+
 
 dotenv.config();
 
-const dashLab = Router ();
+const dashpqrs = Router ();
+
+dashpqrs.get("/viewpqrs", controllers.getpqrs);
+dashpqrs.get("/deletePqrs", controllers.pqrsDelete);
+
+
+export default dashpqrs;

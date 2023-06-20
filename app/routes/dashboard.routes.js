@@ -25,88 +25,25 @@ dash.get("/inicio", (req, res)=>{
 }    
 })
 
-// dash.get("/laboratorio", async(req, res)=>{
+
+// dash.get("/pqrs", (req, res)=>{
 //     if (req.cookies.ckeib){
 //         try {
 //             const token = jwt.verify(req.cookies.ckeib, process.env.SECRET_KEY)
-
-//              let ruta = "http://localhost:3000/api/user";
-//              let option = {
-//                  method: "GET"
-//             }
-//             let datos = {};
-//             const result = await fetch(ruta, option)
-//             .then(response => response.json())
-//             .then(data => {
-//                 datos = data[0]
-//                 //console.log(data[0]);
-//             })
-//             .catch(error => console.error("Error en peticion: " + error ))
-
-
 //                 res.render("dash", {
 //                 "nombre" : token.nombre,
 //                 "foto": token.foto,
-//                 "menu" : 5,
-//                 "datos" : datos
+//                 "menu" : 2
 //              });
 
 //         } catch (error) {
 //             res.redirect("/");
             
 //         }
-//     res.render("dash");
 // }else{
 //     res.redirect("/")
 // }    
 // })
-
-dash.get("/editLab",(req, res)=>{
-    const id = req.query.id;
-    const name = req.query.name;
-
-    let datos = {
-         id: id,
-        name: name
-    }
-
-
-    if (req.cookies.ckeib){
-        try {
-            const token = jwt.verify(
-            req.cookies.ckeib,
-            process.env.SECRET_KEY)
-            res.render("dash",{
-                "nombre" : token.nombre,
-                "foto" : token.foto,
-                "menu" : 6,
-                "datos" : datos
-            })
-        }catch(error){
-            console.error("error con el token");
-    }
-}
-})
-
-dash.get("/pqrs", (req, res)=>{
-    if (req.cookies.ckeib){
-        try {
-            const token = jwt.verify(req.cookies.ckeib, process.env.SECRET_KEY)
-                res.render("dash", {
-                "nombre" : token.nombre,
-                "foto": token.foto,
-                "menu" : 2
-             });
-
-        } catch (error) {
-            res.redirect("/");
-            
-        }
-    res.render("dash");
-}else{
-    res.redirect("/")
-}    
-})
 
 dash.get("/appointment", async(req, res)=>{
     if (req.cookies.ckeib){

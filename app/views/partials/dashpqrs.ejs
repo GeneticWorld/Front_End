@@ -33,32 +33,33 @@
     <!-- Default box -->
     <div class="box">
       <div class="box-body">
-        <div class="col-sm-12"><table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
-          <thead>
-          <tr role="row">
-          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-            Cedula
-          </th>
-          <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
-            Nombre
-          </th>
-          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-              Descripcion
-          </th>
-          <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-            Opciones
-          </th>
-        </tr>
-          </thead>
+        <div class="col-sm-12">
+          <table id="example2" style="table-layout: fixed;" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+            <thead>
+            <tr role="row">
+            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+              Cedula
+            </th>
+            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">
+              Nombre
+            </th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                Descripcion
+            </th>
+            <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+              Opciones
+            </th>
+          </tr>
+            </thead>
           <tbody>
            <% datos.forEach((elements) => { %>
           <tr role="row" class="odd">
             <td><%= elements.cedula %></td>
             <td><%= elements.nombre_completo %></td>
-            <td><%= elements.descripcion %></td>
+            <td style="word-wrap: break-word;"><%= elements.descripcion %></td>
             <td>
                 <a
-                 class="btn btn-danger" onclick="confirmarpqrs(`<%=elements.cedula %>`);">
+                 class="btn btn-danger" onclick="confirmarpqrs(`<%= elements.cedula %>`);">
                 <i class="fa fa-trash"></i>
                 </a>
                 <!-- href="Borrar?id=<%=elements.ID %>"  -->
@@ -75,7 +76,7 @@
   <div class="modal modal-info fade" id="modal-info">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form name="formulario" id="formulario" action="saveEmail" method="POST">
+        <form name="formularioPQRS" id="formularioPQRS" action="pqrsSave" method="POST">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
@@ -84,20 +85,20 @@
         <div class="modal-body">
           <div class="input-group">
             <span class="input-group-addon">-</span>
-            <input name="cedula" type="text" class="form-control" placeholder="Ingrese cedula" required>
+            <input id="cedula" name="cedula" type="text" class="form-control" placeholder="Ingrese cedula" required>
           </div>
           <div class="input-group">
             <span class="input-group-addon">-</span>
-            <input name="nombre_completo" type="text" class="form-control" placeholder="Ingrese nombre">
+            <input  id="nombre_completo" name="nombre_completo" type="text" class="form-control" placeholder="Ingrese nombre">
           </div>
           <div class="input-group">
             <span class="input-group-addon">-</span>
-            <input name="descripcion" type="text" class="form-control" placeholder="Ingrese descripcion">
+            <input id="descripcion" name="descripcion" type="text" class="form-control" placeholder="Ingrese descripcion">
           </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
-          <button onclick="add()" type="submit" class="btn btn-outline">Guardar</button>
+          <button onclick="addPQRS()" type="submit" class="btn btn-outline">Guardar</button>
         </div>
       </form>
       </div>
@@ -128,8 +129,8 @@ if (result.isConfirmed) {
 })
 }
 
-function add() {
-  const form = document.querySelector("#formulario");
+function addPQRS() {
+  const form = document.querySelector("#formularioPQRS");
     form.addEventListener("submit", event => {
       event.preventDefault();
         Swal.fire({

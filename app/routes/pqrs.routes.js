@@ -8,7 +8,7 @@ dotenv.config();
 const dashpqrs = Router ();
 
 dashpqrs.get("/viewpqrs", controllers.getpqrs);
+dashpqrs.post("/pqrsSave", controllers.savePQRS);
 dashpqrs.get("/deletePqrs", controllers.pqrsDelete);
-
 
 export default dashpqrs;

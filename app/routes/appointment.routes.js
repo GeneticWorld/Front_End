@@ -1,8 +1,11 @@
 import { Router } from "express";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import fetch from "node-fetch";
+import * as controllers from "../controllers/appointment.controllers.js";
 
 dotenv.config();
 
-const dashLab = Router ();
+const dashAppointment = Router ();
+
+dashAppointment.get("/viewAppointment", controllers.appointment)
+
+export default dashAppointment;

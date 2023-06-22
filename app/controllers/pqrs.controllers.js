@@ -52,8 +52,9 @@ export const savePQRS = (req, res) => {
         };
         let metodo = "POST";
 
-        if(req.body.cedula){
+        if(req.body.id){
             data = {
+                id: req.body.id,
                 cedula: req.body.cedula,
                 nombre_completo: req.body.nombre_completo,
                 descripcion: req.body.descripcion,
@@ -88,9 +89,8 @@ export const savePQRS = (req, res) => {
     }
 }
 
-
 export const pqrsDelete = async(req, res)=>{
-    const cedula = req.query.cedula;
+    const id = req.query.id;
 
     if (req.cookies.ckeib){
         try {
@@ -98,7 +98,7 @@ export const pqrsDelete = async(req, res)=>{
             req.cookies.ckeib,
             process.env.SECRET_KEY)
 
-            const url = `http://localhost:3000/PQRS/pqrs/${cedula}`;
+            const url = `http://localhost:3000/PQRS/pqrs/${id}`;
             const option={
                 method:"DELETE"
             };

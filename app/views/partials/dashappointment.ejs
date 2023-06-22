@@ -66,11 +66,11 @@
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                  Costo
+                  Costo de la cita
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                  Estado
+                  Estado de la cita
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
@@ -82,31 +82,34 @@
               <% datos.forEach((elements)=> { %>
                 <tr role="row" class="odd">
                   <td>
-                    <%= elements.ID %>
+                    <%= elements.cedula %>
                   </td>
                   <td>
-                    <%= elements.NAME %>
+                    <%= elements.nombre %>
                   </td>
                   <td>
-                    emanuel
+                    <%= elements.apellido %>
                   </td>
                   <td>
-                    emanuel
+                    <%= elements.telefono %>
                   </td>
                   <td>
-                    emanuel
+                    <%= elements.direccion %>
                   </td>
                   <td>
-                    emanuel
+                    <%= elements.correo %>
                   </td>
                   <td>
-                    emanuel
+                    <%= elements.laboratory %>
                   </td>
                   <td>
-                    emanuel
+                    <%= elements.fecha %>
                   </td>
                   <td>
-                    emanuel
+                    <%= elements.horaCita %>
+                  </td>
+                  <td>
+                    <%= elements.costoCita %>
                   </td>
                   <td>
                     <a href="edit-user?id=<%= elements.ID %>&name=<%= elements.NAME %>" class="btn btn-warning">

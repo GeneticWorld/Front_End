@@ -2,7 +2,6 @@ import fetch from "node-fetch";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 
-
 dotenv.config()
 
 export const getEmail = async (req, res) => {

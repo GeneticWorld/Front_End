@@ -55,18 +55,15 @@
           <tbody>
            <% datos.forEach((elements) => { %>
           <tr role="row" class="odd">
-            
-            <td><%= elements.cedula %></td>
-            <td><%= elements.nombre_completo %></td>
+            <td style="word-wrap: break-word;"><%= elements.cedula %></td>
+            <td style="word-wrap: break-word;"><%= elements.nombre_completo %></td>
             <td style="word-wrap: break-word;"><%= elements.descripcion %></td>
             <td>
                 <a
                  class="btn btn-danger" onclick="confirmarpqrs(`<%= elements.id %>`);">
                 <i class="fa fa-trash"></i>
                 </a>
-                <!-- href="Borrar?id=<%=elements.ID %>"  -->
             </td>
-            
           </tr>
           <% }) %>
           

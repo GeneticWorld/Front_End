@@ -32,7 +32,7 @@
       </div>
       <div class="box-body">
         <div class="col-sm-12">
-          <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+          <table id="example2" style="table-layout: fixed;" class="table table-bordered table-hover dataTable" role="grid"
             aria-describedby="example2_info">
             <thead>
               <tr role="row">
@@ -50,6 +50,10 @@
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                  Telefono
+                </th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                  aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                   Direccion
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
@@ -58,19 +62,20 @@
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                  Telefono
+                  Laboratorio
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                  Laboratorios
+                  Fecha
+                </th>
+                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                  aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
+                  Hora de la cita
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
                   Costo de la cita
-                </th>
-                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                  aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
-                  Estado de la cita
+
                 </th>
                 <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
                   aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">
@@ -81,45 +86,44 @@
             <tbody>
               <% datos.forEach((elements)=> { %>
                 <tr role="row" class="odd">
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.cedula %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.nombre %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.apellido %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.telefono %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.direccion %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.correo %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.laboratory %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.fecha %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.horaCita %>
                   </td>
-                  <td>
+                  <td style="word-wrap: break-word;">
                     <%= elements.costoCita %>
                   </td>
-                  <td>
-                    <a href="edit-user?id=<%= elements.id %>&name=<%= elements.NAME %>" class="btn btn-warning">
+                  <td style="word-wrap: break-word;">
+                    <a href="editA?id=<%= elements.id %>&cedula=<%= elements.cedula %>&nombre=<%= elements.nombre %>&apellido=<%= elements.apellido %>&telefono=<%= elements.telefono %>&direccion=<%= elements.direccion %>&correo=<%= elements.correo %>&laboratory=<%= elements.laboratory %>&fecha=<%= elements.fecha %>&horaCita=<%= elements.horaCita %>&costoCita=<%= elements.costoCita %>" class="btn btn-warning">
                       <i class="fa fa-edit"></i>
                     </a>
 
-                    <a class="btn btn-danger" onclick="confirmar(`<%=elements.ID %>`);">
+                    <a class="btn btn-danger" onclick="deleteA(`<%=elements.id %>`);">
                       <i class="fa fa-trash"></i>
                     </a>
-                    <!-- href="Borrar?id=<%=elements.ID %>"  -->
                   </td>
                 </tr>
                 <% }) %>
@@ -133,74 +137,82 @@
   <div class="modal modal-info fade" id="modal-info">
     <div class="modal-dialog">
       <div class="modal-content">
-        <form action="guardar" method="post">
+        <form action="appointSave" name="formAppointment" id="formAppointment" method="post">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Ingresar los datos</h4>
+            <h4 class="modal-title">Ingrese los datos</h4>
           </div>
           <div class="modal-body">
             <div class="input-group">
               <span class="input-group-addon">Cedula</span>
-              <input name="name" type="text" class="form-control" placeholder="Nombre">
+              <input name="cedula" type="text" class="form-control" placeholder="Cedula">
             </div>
           </div>
           <div class="modal-body">
             <div class="input-group">
               <span class="input-group-addon">Nombre</span>
-              <input name="name" type="text" class="form-control" placeholder="Nombre">
+              <input name="nombre" type="text" class="form-control" placeholder="Nombre">
             </div>
           </div>
           <div class="modal-body">
             <div class="input-group">
               <span class="input-group-addon">Apellido</span>
-              <input name="name" type="text" class="form-control" placeholder="Apellido">
-            </div>
-          </div>
-          <div class="modal-body">
-            <div class="input-group">
-              <span class="input-group-addon">Direccion</span>
-              <input name="name" type="text" class="form-control" placeholder="Direccion">
-            </div>
-          </div>
-          <div class="modal-body">
-            <div class="input-group">
-              <span class="input-group-addon">Correo</span>
-              <input name="name" type="text" class="form-control" placeholder="Correo">
+              <input name="apellido" type="text" class="form-control" placeholder="Apellido">
             </div>
           </div>
           <div class="modal-body">
             <div class="input-group">
               <span class="input-group-addon">Telefono</span>
-              <input name="name" type="text" class="form-control" placeholder="Telefono">
+              <input name="telefono" type="text" class="form-control" placeholder="Telefono">
             </div>
           </div>
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon">Direccion</span>
+              <input name="direccion" type="text" class="form-control" placeholder="Direccion">
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon">Correo</span>
+              <input name="correo" type="text" class="form-control" placeholder="Correo">
+            </div>
+          </div>
+
           <div class="modal-body">
             <div class="input-group">
               <span class="input-group-addon">Laboratorios</span>
-              <select class="form-control">
-                <option value="opcion1">Opción 1</option>
-                <option value="opcion2">Opción 2</option>
-                <option value="opcion3">Opción 3</option>
+              <select class="form-control" name="idLab">
+                <option value="3">Sede norte Lab</option>
+                <option value="4">Sede sur Lab</option>
+                <option value="6">Sede Chile</option>
               </select>
+            </div>
+          </div>
+
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon">Fecha</span>
+              <input name="fecha" type="text" class="form-control" placeholder="Fecha">
             </div>
           </div>
           <div class="modal-body">
             <div class="input-group">
-              <span class="input-group-addon">Costo</span>
-              <input name="name" type="text" class="form-control" placeholder="Costo">
+              <span class="input-group-addon">Hora de la cita</span>
+              <input name="horaCita" type="text" class="form-control" placeholder="Hora cita">
+            </div>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon">Valor de la cita</span>
+              <input name="costoCita" type="text" class="form-control" placeholder="Valor">
             </div>
           </div>
 
-
-
-
-
-
-
           <div class="modal-footer">
-            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-outline">Guardar</button>
+            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal"> Cancelar </button>
+            <button type="submit" class="btn btn-outline" onclick="addAppointment()"> Guardar </button>
           </div>
         </form>
       </div>
@@ -210,7 +222,7 @@
   </div>
 </div>
 <script>
-  function confirmar(id) {
+  function deleteA(id) {
     Swal.fire({
       title: 'Estas completamente seguro?',
       text: "Quieres eliminar el siguiente usuario?",
@@ -221,7 +233,7 @@
       confirmButtonText: 'SI'
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = `borrar?id=${id}`
+        window.location.href = `deleAppointment?id=${id}`
         Swal.fire(
           'Eliminado!',
           'Su registro ah sido eliminado corretamente',
@@ -230,4 +242,28 @@
       }
     })
   }
+
+  function addAppointment() {
+  const form = document.querySelector("#formAppointment");
+    form.addEventListener("submit", event => {
+      event.preventDefault();
+        Swal.fire({
+        title: 'Estas seguro de guardar el siguiente correo?',
+          text: "Agregaras el correo",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, Guardar!'
+}).then((result) => {
+    if (result.isConfirmed) {
+      form.submit();
+        Swal.fire(
+          'Actualizado!',
+          'Su correo se actualizo.',
+          'success')}
+      })
+      })
+      }
+</script>
 </script>

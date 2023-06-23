@@ -8,5 +8,7 @@ const dashAppointment = Router ();
 
 dashAppointment.get("/viewAppointment", controllers.appointment);
 dashAppointment.post("/appointSave", controllers.saveAppointment);
+dashAppointment.get("/editA", controllers.editAppointment);
+dashAppointment.get("/deleAppointment", controllers.deleteAppointment);
 
 export default dashAppointment;

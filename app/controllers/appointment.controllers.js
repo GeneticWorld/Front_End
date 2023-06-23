@@ -64,12 +64,12 @@ export const saveAppointment = (req, res) => {
             data = {
             id: req.body.id,
             cedula: req.body.cedula,
-            nombre_completo: req.body.nombre,
-            descripcion: req.body.apellido,
-            telefonono: req.body.telefono,
+            nombre: req.body.nombre,
+            apellido: req.body.apellido,
+            telefono: req.body.telefono,
             direccion: req.body.direccion,
             correo: req.body.correo,
-            laboratorio: req.body.id_laboratorio,
+            id_laboratorio: req.body.id_laboratorio,
             fecha: req.body.fecha,
             horaCita: req.body.horaCita,
             costoCita: req.body.costoCita
@@ -79,7 +79,7 @@ export const saveAppointment = (req, res) => {
             metodo = "put"
         }
 
-        let ruta = "http://localhost:3000/PQRS/pqrs";
+        let ruta = "http://localhost:3000/appointment/viewAppointment";
         let option = {
             method: metodo,
             headers: {

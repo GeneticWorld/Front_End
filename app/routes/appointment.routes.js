@@ -6,7 +6,7 @@ dotenv.config();
 
 const dashAppointment = Router ();
 
-dashAppointment.get("/viewAppointment", controllers.appointment)
-dashAppointment.post("/")
+dashAppointment.get("/viewAppointment", controllers.appointment);
+dashAppointment.post("/appointSave", controllers.saveAppointment);
 
 export default dashAppointment;

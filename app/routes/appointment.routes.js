@@ -10,5 +10,6 @@ dashAppointment.get("/viewAppointment", controllers.appointment);
 dashAppointment.post("/appointSave", controllers.saveAppointment);
 dashAppointment.get("/editA", controllers.editAppointment);
 dashAppointment.get("/deleAppointment", controllers.deleteAppointment);
+dashAppointment.post("/generatePdf", controllers.pdfGenerate);
 
 export default dashAppointment;

@@ -1,6 +1,10 @@
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
+import axios from "axios";
+import PDFDocument from "pdfkit";
+import fs from "fs";
+import express from "express";
 
 export const appointment = async(req, res)=>{
     if (req.cookies.ckeib){
@@ -173,3 +177,77 @@ export const deleteAppointment = async(req, res)=>{
     }
     }
 }
+
+export const pdfGenerate = async(req, res) => {
+    try {
+        const formato = req.body.formato;
+        const response = await axios.get("http://localhost:3000/appointment/viewAppointment");
+        const citasData = response.data[0];
+
+        citasData.forEach(citas => {
+            console.log(`id: ${citas.id}`);
+            console.log(`Cedula: ${citas.cedula}`);
+            console.log(`Nombre: ${citas.nombre}`);
+            console.log(`Apellido: ${citas.apellido}`);
+            console.log(`Telefono: ${citas.telefono}`);
+            console.log(`Direccion: ${citas.direccion}`);
+            console.log(`Correo: ${citas.correo}`);
+            console.log(`Laboratorio: ${citas.laboratory}`);
+            console.log(`Fecha: ${citas.fecha}`);
+            console.log(`Hora de la cita: ${citas.horaCita}`);
+            console.log(`Valor de la cita: ${citas.costoCita}`);
+        });
+
+        if (formato === "pdf") {
+            const doc = new PDFDocument();
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'attachment;filename=ReporteCitas.pdf');
+            doc.pipe(res);
+
+            doc.fontSize(20).text('informacion de las citas', {align: 'center'});
+            // const img = fs.readFileSync('../public/images/mundogenetico.webp');
+            // doc.image(img, {width: 150});
+
+            citasData.forEach(citas => {
+                doc.fontSize(12).text(`id: ${citas.id}`);
+                doc.fontSize(12).text(`Cedula: ${citas.cedula}`);
+                doc.fontSize(12).text(`Nombre: ${citas.nombre}`);
+                doc.fontSize(12).text(`Apellido: ${citas.apellido}`);
+                doc.fontSize(12).text(`Telefono: ${citas.telefono}`);
+                doc.fontSize(12).text(`Direccion: ${citas.direccion}`);
+                doc.fontSize(12).text(`Correo: ${citas.correo}`);
+                doc.fontSize(12).text(`Laboratorio: ${citas.laboratory}`);
+                doc.fontSize(12).text(`Fecha: ${citas.fecha}`);
+                doc.fontSize(12).text(`Hora de la cita: ${citas.horaCita}`);
+                doc.fontSize(12).text(`Valor de la cita: ${citas.costoCita}`);
+                doc.moveDown();
+            });
+            doc.end();
+        }else if(formato === 'excel'){
+            const workbook = new excel.workbook();
+            const worksheet = workbook.addworksheet('citas');
+
+            worksheet.columns = [
+                {header: 'Cedula', key: 'cedula', width: 20},
+                {header: 'Nombre', key: 'nombre', width: 20}
+
+            ];
+
+            citasData.forEach((citas) => {
+                worksheet.addRow({cedula: citas.cedula, nombre: citas.nombre});
+            });
+
+            res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+
+            res.setHeader('Content-Disposition', 'attachment;filename=ReporteCitas.xlsx');
+
+            await workbook.xlsx.write(res);
+
+            res.end();
+        }else{
+            res.status(400).send('formato no valido seleccione los del menú');
+        }
+    } catch (error) {
+        console.error(error);
+    }
+};

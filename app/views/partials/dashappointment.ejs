@@ -1,4 +1,5 @@
 <div class="content-wrapper">
+
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
@@ -129,11 +130,23 @@
                 <% }) %>
 
           </table>
+          <form action="generatePdf" method="post">
+
+            <input type="hidden" name="datos">
+            <label for="formato">Formato</label>
+            <select name="formato" id="formato">
+              <option value="pdf">PDF</option>
+              <option value="excel">EXCEL</option>
+            </select>
+            <button type="submit">
+                  generar reporte
+            </button>
+        </form>
         </div>
       </div>
       <!-- /.box-body -->
 
-</section>
+  </section>
   <div class="modal modal-info fade" id="modal-info">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -220,6 +233,7 @@
     </div>
     <!-- /.modal-dialog -->
   </div>
+  
 </div>
 <script>
   function deleteA(id) {

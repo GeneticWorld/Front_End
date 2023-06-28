@@ -1,3 +1,4 @@
+// Modulos
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
@@ -89,31 +90,35 @@ export const savePQRS = (req, res) => {
     }
 }
 
-export const pqrsDelete = async(req, res)=>{
+// Elimina información
+export const pqrsDelete = async(req, res) => {
     const id = req.query.id;
 
     if (req.cookies.ckeib){
         try {
             const token = jwt.verify(
             req.cookies.ckeib,
-            process.env.SECRET_KEY)
+            process.env.SECRET_KEY);
 
             const url = `http://localhost:3000/PQRS/pqrs/${id}`;
+            
             const option={
                 method:"DELETE"
             };
+
             const result =  await fetch(url, option)
-            .then(response => response.json())
+            .then(res => res.json())
             .then(data => {
                if (data.affecteRows == 1){
-                console.log("borrado");
+                console.log("Borrado");
                }else{
-                console.log("no borro");
-               }
-            })
-            res.redirect("/viewPqrs/viewpqrs")
+                console.log("No borro");
+               };
+            });
+            res.redirect("/viewPqrs/viewpqrs");
+
         }catch(error){
-            console.error("error con el token");
-    }
-    }
-}
+            console.error("Error con el token:" + error);
+    };
+    };
+};

@@ -1,23 +1,25 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
+    <!-- Contenido encabezado -->
     <section class="content-header">
         <h1>
             Editar laboratorio
-            <small></small>
         </h1>
         <ol class="breadcrumb">
-            <li><a href="/v1/inicio"><i class="fa fa-home"></i>Home</a></li>
+            <li>
+                <a href="/v1/inicio"><i class="fa fa-home">
+
+                </i>
+                    Home
+                </a>
+            </li>
         </ol>
     </section>
 
-    <!-- Main content -->
+    <!-- Contenido Principal -->
     <section class="content">
 
         <!-- Default box -->
-        <div class="box">
-
-
-
+    <div class="box">
             <div class="box-body">
                 <form name="formularioLab" id="formularioLab" action="labeSave" method="post">
                     <div class="form-group has-success">
@@ -42,25 +44,25 @@
                     </div>
                 </form>
             </div>
+    </div>
             <script>
                 function actualizarLab() {
                     const form = document.querySelector("#formularioLab");
                     form.addEventListener("submit", event => {
                         event.preventDefault();
                         Swal.fire({
-                            title: 'Estas seguro de guardar estos cambios?',
-                            text: "Estas actualizando la informacion",
+                            title: '¿Estas seguro de guardar estos cambios?',
+                            text: "Estas actualizando la información",
                             icon: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: 'Si, actualizar!'
+                            confirmButtonText: '¡Si, actualizar!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 form.submit();
                                 Swal.fire(
-                                    'Actualizado!',
-                                    'Su correo se actualizo.',
+                                    '¡Actualizado!',
                                     'success'
                                 )
                             }
@@ -68,14 +70,6 @@
 
                     })
                 }
-
-
-            </script>
-
-
-
-
-
-    </section>
-
+           </script>
+    </section> 
 </div>

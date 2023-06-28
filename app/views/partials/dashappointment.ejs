@@ -118,7 +118,7 @@
                     <%= elements.costoCita %>
                   </td>
                   <td style="word-wrap: break-word;">
-                    <a href="editA?id=<%= elements.id %>&cedula=<%= elements.cedula %>&nombre=<%= elements.nombre %>&apellido=<%= elements.apellido %>&telefono=<%= elements.telefono %>&direccion=<%= elements.direccion %>&correo=<%= elements.correo %>&laboratory=<%= elements.laboratory %>&fecha=<%= elements.fecha %>&horaCita=<%= elements.horaCita %>&costoCita=<%= elements.costoCita %>" class="btn btn-warning">
+                    <a href="editA?id=<%= elements.id %>&cedula=<%= elements.cedula %>&nombre=<%= elements.nombre %>&apellido=<%= elements.apellido %>&telefono=<%= elements.telefono %>&direccion=<%= elements.direccion %>&correo=<%= elements.correo %>&idLab=<%= elements.idLab %>&fecha=<%= elements.fecha %>&horaCita=<%= elements.horaCita %>&costoCita=<%= elements.costoCita %>" class="btn btn-warning">
                       <i class="fa fa-edit"></i>
                     </a>
 
@@ -191,9 +191,9 @@
           <div class="modal-body">
             <div class="input-group">
               <span class="input-group-addon">Laboratorios</span>
-              <select class="form-control" name="idLab">
-                <option value="3">Sede norte Lab</option>
-                <option value="4">Sede sur Lab</option>
+              <select class="form-control" name="idLab" id="idLab">
+                <option value="16">Bucaramanga</option>
+                <option value="18">Sede Argentina</option>
                 <option value="6">Sede Chile</option>
               </select>
             </div>
@@ -257,22 +257,19 @@
     form.addEventListener("submit", event => {
       event.preventDefault();
         Swal.fire({
-        title: 'Estas seguro de guardar el siguiente correo?',
-          text: "Agregaras el correo",
+        title: '¿Estas seguro de guardar la cita?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Guardar!'
+            confirmButtonText: '¡Si, Guardar!'
 }).then((result) => {
     if (result.isConfirmed) {
       form.submit();
         Swal.fire(
-          'Actualizado!',
-          'Su correo se actualizo.',
+          'Guardado Exitosamente!',
           'success')}
       })
       })
       }
-</script>
 </script>

@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <html>
+  <!-- Ruta del encabezado del código -->
   <%- include("partials/dashhead.ejs"); %>
-<body class="hold-transition skin-blue sidebar-mini">
-<!-- Site wrapper -->
-<div class="wrapper">
+  <body class="hold-transition skin-blue sidebar-mini">
+  <!-- Site wrapper -->
+  <div class="wrapper">
+    <!-- Ruta del menú -->
+    <%- include("partials/dashmenu.ejs"); %>
 
-  <%- include("partials/dashmenu.ejs"); %>
-
-  <!-- Ruta de dashinicio -->
-  <% if ( menu == 0) { %>
-  <%- include("partials/dashinicio.ejs"); %>
-  <% } %>
-
-  <% if ( menu == 1) { %>
-  <%- include("partials/dashemail.ejs"); %>
-  <% } %>
-
-  <% if ( menu == 2) { %>
-  <%- include("partials/dashpqrs.ejs"); %>
-  <% } %>
-
-  <% if ( menu == 3) { %>
-  <%- include("partials/dashappointment.ejs"); %>
-  <% } %>
-
-  <% if ( menu == 4) { %>
-  <%- include("partials/editEmail.ejs"); %>
-  <% } %>
-
-  <% if ( menu == 5) { %>
-  <%- include("partials/dashlaboratory.ejs"); %>
-  <% } %>
-
-  <% if ( menu == 6) { %>
-  <%- include("partials/editLab.ejs"); %>
-  <% } %>
-
-  <% if ( menu == 7) { %>
-    <%- include("partials/dashEditAppointment.ejs"); %>
+    <!-- Ruta de dashinicio -->
+    <% if ( menu == 0) { %>
+    <%- include("partials/dashinicio.ejs"); %>
     <% } %>
 
+    <!-- Ruta para ver los correos -->
+    <% if ( menu == 1) { %>
+    <%- include("partials/dashemail.ejs"); %>
+    <% } %>
 
+    <!-- Ruta para ver las PQRS -->
+    <% if ( menu == 2) { %>
+    <%- include("partials/dashpqrs.ejs"); %>
+    <% } %>
 
-<!-- jQuery 3 -->
-<script src="../v1/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="../v1/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="../v1/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="../v1/bower_components/fastclick/lib/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="../v1/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../v1/dist/js/demo.js"></script>
-<script>
-  $(document).ready(function () {
-    $('.sidebar-menu').tree()
-  })
-</script>
-</body>
+    <!-- Ruta para ver la vista de las citas -->
+    <% if ( menu == 3) { %>
+    <%- include("partials/dashappointment.ejs"); %>
+    <% } %>
+
+    <!-- Ruta para editar los correos -->
+    <% if ( menu == 4) { %>
+    <%- include("partials/editEmail.ejs"); %>
+    <% } %>
+    
+    <!-- Ruta para ver los laboratorios -->
+    <% if ( menu == 5) { %>
+    <%- include("partials/dashlaboratory.ejs"); %>
+    <% } %>
+
+    <!-- Ruta para editar los laboratorios -->
+    <% if ( menu == 6) { %>
+    <%- include("partials/editLab.ejs"); %>
+    <% } %>
+
+    <!-- Ruta para editar las citas -->
+    <% if ( menu == 7) { %>
+      <%- include("partials/dashEditAppointment.ejs"); %>
+      <% } %>
+
+  <!-- jQuery 3 -->
+  <script src="../v1/bower_components/jquery/dist/jquery.min.js"></script>
+  <!-- Bootstrap 3.3.7 -->
+  <script src="../v1/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <!-- SlimScroll -->
+  <script src="../v1/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <!-- FastClick -->
+  <script src="../v1/bower_components/fastclick/lib/fastclick.js"></script>
+  <!-- AdminLTE App -->
+  <script src="../v1/dist/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="../v1/dist/js/demo.js"></script>
+  <script>
+    $(document).ready(function () {
+      $('.sidebar-menu').tree()
+    })
+  </script>
+  </body>
 </html>

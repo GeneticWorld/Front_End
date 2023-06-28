@@ -53,7 +53,7 @@ export const save = (req, res) => {
                 email: req.body.email
             };
             metodo = "put"
-        }
+        };
 
         let ruta = "http://localhost:3000/api/email";
         let option = {
@@ -69,6 +69,7 @@ export const save = (req, res) => {
             .then(res => res.json())
             .then(data => {
                 //aqui vamos
+                console.log(data);
             })
             .catch(err => console.log("Error al consumir API: " + err))
             res.redirect("/viewEmail/email");
@@ -109,8 +110,9 @@ export const emailEdit = (req, res)=>{
 }
 
 
-export const emailDelete = async(req, res)=>{
+export const emailDelete = async(req, res) => {
     const id = req.query.id;
+
     if (req.cookies.ckeib){
         try {
             const token = jwt.verify(
@@ -123,8 +125,8 @@ export const emailDelete = async(req, res)=>{
             };
             const result =  await fetch(url, option)
             .then(response=>response.json())
-            .then(data=>{
-               if (data.affecteRows==1){
+            .then(data => {
+               if (data[0].affecteRows === 1){
                 console.log("borrado");
                }else{
                 console.log("no borro");
@@ -133,7 +135,7 @@ export const emailDelete = async(req, res)=>{
             res.redirect("/viewEmail/email")
         }catch(error){
             console.error("error con el token");
-    }
-    }
-}
+    };
+    };
+};
 

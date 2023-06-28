@@ -1,9 +1,8 @@
 <div class="content-wrapper">
-  <!-- Content Header (Page header) -->
+  <!-- Contenido del encabezado -->
   <section class="content-header">
     <h1>
       PQRS
-      <small></small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="/v1/inicio"><i class="fa fa-home"></i>Home</a></li>
@@ -28,10 +27,9 @@
         </div>
       </div>
 
-  <!-- Main content -->
+  <!-- Contenido principal  -->
   
 
-    <!-- Default box -->
     <div class="box">
       <div class="box-body">
         <div class="col-sm-12">
@@ -69,7 +67,6 @@
           
         </table></div>
       </div>
-      <!-- /.box-body -->
   
   </section>
   <div class="modal modal-info fade" id="modal-info">
@@ -101,27 +98,24 @@
         </div>
       </form>
       </div>
-      <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
   </div>
 </div>
 <script>
   function confirmarpqrs (id){
     Swal.fire({
-title: 'Estas completamente seguro?',
-text: "Quieres eliminar el siguiente usuario?",
+title: '¿Estas completamente seguro?',
+text: "¿Quieres eliminar la PQRS?",
 icon: 'warning',
 showCancelButton: true,
 confirmButtonColor: '#3085d6',
 cancelButtonColor: '#d33',
-confirmButtonText: 'SI'
+confirmButtonText: '¡Si, eliminar!'
 }).then((result) => {
 if (result.isConfirmed) {
   window.location.href=`deletePqrs?id=${id}`
   Swal.fire(
-    'Eliminado!',
-    'Su registro ah sido eliminado corretamente',
+    '¡Eliminado exitosamente!',
     'success'
   )
 }
@@ -133,19 +127,17 @@ function addPQRS() {
     form.addEventListener("submit", event => {
       event.preventDefault();
         Swal.fire({
-        title: 'Estas seguro de guardar el siguiente correo?',
-          text: "Agregaras el correo",
+        title: '¿Estas seguro de guardar la PQRS?',
           icon: 'warning',
           showCancelButton: true,
           confirmButtonColor: '#3085d6',
           cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, Guardar!'
+            confirmButtonText: '¡Si, Guardar!'
 }).then((result) => {
     if (result.isConfirmed) {
       form.submit();
         Swal.fire(
-          'Actualizado!',
-          'Su correo se actualizo.',
+          '¡Guardado exitosamente!',
           'success')}
       })
       })

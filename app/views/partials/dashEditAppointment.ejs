@@ -1,186 +1,146 @@
- <div class="content-wrapper">
-     <!-- Content Header (Page header) -->
+<div class="content-wrapper">
+    <!-- Contenido encabezado -->
     <section class="content-header">
         <h1>
-            Edite la cita
-            <small></small>
+            Editar la cita
         </h1>
         <ol class="breadcrumb">
-            <li><a href="/v1/inicio"><i class="fa fa-home"></i>Home</a></li>
+            <li>
+                <a href="/v1/inicio"><i class="fa fa-home"></i>Home</a>
+            </li>
         </ol>
     </section>
-
-    <!-- Main content -->
+    
+    <!-- Contenido principal -->
     <section class="content">
-
-        <!-- Default box -->
+    
+    
         <div class="box">
-            <div class="box-header with-border">
-                <h3 class="box-title">
-
-                </h3>
-
+            
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fa fa-minus"></i></button>
+                        title="Collapse"><i class="fa fa-minus"></i>
+                    </button>
                     <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip"
                         title="Remove">
-                        <i class="fa fa-times"></i></button>
+                        <i class="fa fa-times"></i>
+                    </button>
                 </div>
-            </div>
-
+    
             <div class="box-body">
-                <form name="formAppo" id="name="formAppo"" action="appointSave" method="post">
+                <form name="formAppo" id="formAppo"" action="appointSave" method="post">
+                    
                     <div class="form-group has-success">
-                        <label>id</label>
-                        <input type="text" 
-                        class="form-control"
-                        value="<%= datos.id %>"
-                        name="id"
-                        class="form-control" readonly>
+                        <label>Id</label>
+                        <input type="text" class="form-control" value="<%= datos.id %>" name="id" readonly>
                     </div>
-
+    
                     <div class="input-group">
                         <span class="input-group-addon">Cedula</span>
-                        <input type="number"
-                        class="form-control" 
-                        value="<%= datos.cedula %>" 
-                        name="cedula"
-                        placeholder="Cedula">
+                        <input type="number" class="form-control" value="<%= datos.cedula %>" name="cedula" placeholder="Cedula">
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Nombre</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.nombre %>" 
-                        name="nombre"
-                        placeholder="Nombre">
+                        <input type="text" class="form-control" value="<%= datos.nombre %>" name="nombre"
+                            placeholder="Nombre">
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Apellido</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.apellido %>" 
-                        name="apellido"
-                        placeholder="Apellido">
+                        <input type="text" class="form-control" value="<%= datos.apellido %>" name="apellido"
+                            placeholder="Apellido">
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Telefono</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.telefono %>" 
-                        name="telefono"
-                        placeholder="Telefono">
+                        <input type="text" class="form-control" value="<%= datos.telefono %>" name="telefono" placeholder="Telefono">
                     </div>
+
                     <br>
+                    
                     <div class="input-group">
                         <span class="input-group-addon">Direccion</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.direccion %>" 
-                        name="direccion"
-                        placeholder="Direccion">
+                        <input type="text" class="form-control" value="<%= datos.direccion %>" name="direccion" placeholder="Direccion">
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Correo</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.correo %>" 
-                        name="correo"
-                        placeholder="Correo">
+                        <input type="text" class="form-control" value="<%= datos.correo %>" name="correo" placeholder="Correo">
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Laboratorios</span>
-                        <select class="form-control" name="idLab">
-                            <option value="3">Sede norte Lab</option>
-                            <option value="4">Sede sur Lab</option>
+                        <select class="form-control" name="idLab" id="idLab" value="<%= datos.idLab %>">
+                            <option value="16">Bucaramanga</option>
+                            <option value="18">Sede Argentina</option>
                             <option value="6">Sede Chile</option>
                         </select>
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Fecha</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.fecha %>" 
-                        name="fecha"
-                        placeholder="Fecha">
+                        <input type="text" class="form-control" value="<%= datos.fecha %>" name="fecha" placeholder="Fecha">
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Hora cita</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.horaCita %>" 
-                        name="horaCita"
-                        placeholder="Hora cita">
+                        <input type="text" class="form-control" value="<%= datos.horaCita %>" name="horaCita" placeholder="Hora cita">
                     </div>
+
                     <br>
+
                     <div class="input-group">
                         <span class="input-group-addon">Costo cita</span>
-                        <input type="text" 
-                        class="form-control" 
-                        value="<%= datos.costoCita %>" 
-                        name="costoCita"
-                        placeholder="Costo cita">
+                        <input type="text" class="form-control" value="<%= datos.costoCita %>" name="costoCita" placeholder="Costo cita">
                     </div>
+
                     <br>
+
                     <div class="box-footer">
                         <button class="btn btn-app" type="submit" onclick="confirmar()"></a>
-                        <i class="fa fa-save"></i> Guardar
+                            <i class="fa fa-save"></i> Guardar
                         </button>
                         <a href="/viewA/viewAppointment" class="btn btn-app">
-                            <i class="fa fa-times"></i>
-                            cancelar
+                            <i class="fa fa-times"></i> cancelar
                         </a>
                     </div>
                 </form>
             </div>
             <script>
-            //     function confirmar(){
-            //         Swal.fire({
-            //     title: 'Desea guardar los cambios?',
-            // text: "Guardar cambios",
-            // icon: 'question',
-            // showCancelButton: true,
-            // confirmButtonColor: '#3085d6',
-            // cancelButtonColor: '#d33',
-            // confirmButtonText: 'SI'
-            // }).then((result) => {
-            // if (result.isConfirmed) {
-            //     Swal.fire(
-            //     'Se ah modificado el registro!',
-            //     'Your file has been deleted.',
-            //     'success'
-            //     )
-            // }
-            // })
-                            // }
-
-                            function confirmar() {
+                // Alerta de confirmación de actualización de la cita
+                function confirmar() {
                     const form = document.querySelector("#formAppo");
                     form.addEventListener("submit", event => {
                         event.preventDefault();
                         Swal.fire({
-                            title: 'Estas seguro de guardar estos cambios?',
-                            text: "Estas actualizando la informacion",
+                            title: '¿Estas seguro de guardar estos cambios?',
+                            text: "¡Estas actualizando la información!",
                             icon: 'warning',
                             showCancelButton: true,
                             confirmButtonColor: '#3085d6',
                             cancelButtonColor: '#d33',
-                            confirmButtonText: 'Si, actualizar!'
+                            confirmButtonText: '¡Si, actualizar!'
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 form.submit();
                                 Swal.fire(
-                                    'Actualizado!',
-                                    'Su correo se actualizo.',
+                                    '¡Actualizado!',
+                                    'La cita se actualizo exitosamente.',
                                     'success'
                                 )
                             }
@@ -188,13 +148,6 @@
 
                     })
                 }
-
-                        </script>
-
-
-
-            <!-- /.box-body -->
-
+            </script>
     </section>
-
 </div> 

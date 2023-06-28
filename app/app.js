@@ -1,3 +1,4 @@
+// Modulos
 import express from 'express';
 import dotenv from 'dotenv';
 import { loginRouter } from './routes/login.routes.js';
@@ -14,7 +15,6 @@ import dashLaboratory from './routes/lab.routes.js';
 import dashEmail from './routes/email.routes.js';
 import dashpqrs from './routes/pqrs.routes.js';
 import dashAppointment from './routes/appointment.routes.js';
-// import dashInicio from './routes/inicio.routes.js';
 
 dotenv.config();
 
@@ -36,7 +36,7 @@ app.use(express.static(__dirname + '../public'));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false}));
 
-// RUTAS Y PERMISOS DE GOOGLE
+// Rutas y permisos de Google
 app.use("/auth", passport.authenticate("auth-google", {
     scope: [
         "https://www.googleapis.com/auth/userinfo.email",
@@ -45,7 +45,7 @@ app.use("/auth", passport.authenticate("auth-google", {
     session: false
 }), loginRouter);
 
-
+// Rutas
 app.use("/", route);
 app.use("/viewEmail", dashEmail);
 app.use("/v1", dash);
@@ -53,14 +53,7 @@ app.use("/viewLab", dashLaboratory);
 app.use("/viewPqrs", dashpqrs);
 app.use("/viewA", dashAppointment);
 
-
-
-// SE CAPTURA EL PUERTO QUE SE ENVUENTRA EN LOS AMBIENTES
+// Puerto
 app.set("port", process.env.PORT || 9999);
-
-// ESTO SE VE EN LA RUTA PRINCIPAL
-// app.get("/", (req, res) => {
-//     res.send("Hola, Bienvenido");
-// });
 
 export default app;

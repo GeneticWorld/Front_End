@@ -10,6 +10,7 @@ dashLaboratory.get("/lab",controllers.viewLab);
 dashLaboratory.post("/labeSave", controllers.saveLab);
 dashLaboratory.get("/editLab", controllers.labEdit);
 dashLaboratory.get("/deleteLab", controllers.labDelete);
+dashLaboratory.post("/generatePdf", controllers.pdfGenerate);
 
 export default dashLaboratory;
 

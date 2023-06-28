@@ -1,10 +1,8 @@
 import fetch from "node-fetch";
-import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-
-
-dotenv.config()
-
+import axios from "axios";
+import PDFDocument from "pdfkit-table";
+import path from "path";
 
 export const viewLab = async (req, res) => {
     if (req.cookies.ckeib) {
@@ -139,3 +137,66 @@ export const labDelete = async(req, res)=>{
     }
 }
 
+export const pdfGenerate = async (req, res) => {
+    try {
+      // Hacer una solicitud GET a la API para obtener la información
+      const response = await axios.get('http://localhost:3000/labApi/laboratory');
+      const labData = response.data[0]; // Obtener el primer elemento del arreglo
+  
+      // Crear un nuevo documento PDF
+      const doc = new PDFDocument({ margin: 30, size: 'A4' });
+  
+      // Stream el contenido PDF a la respuesta HTTP
+      res.setHeader('Content-Type', 'application/pdf');
+      res.setHeader('Content-Disposition', 'attachment; filename=reporteLaboratorios.pdf');
+      doc.pipe(res);
+  
+      // Agregar el encabezado
+      doc.fontSize(24).text('Reporte de laboratorios', { align: 'center' });
+  
+      // Agregar espacio después del encabezado
+      doc.moveDown(3);
+
+    // Agregar el logo del proyecto
+      const logoHeight = 80;
+      const logoWidth = 80;
+      const __dirname = path.resolve()
+      const imagePath = path.resolve(path.join(__dirname, 'public', 'images', 'logoMundoGenetico.png')) ;
+  
+      const pageWidth = doc.page.width;
+      const pageHeight = doc.page.height;
+  
+      const logoX = 30;
+      const logoY = 100;
+  
+        doc.image(imagePath, logoX, logoY, { width: logoWidth, height: logoHeight });
+  
+      // Agregar espacio después de la imagen
+      doc.moveDown(2);
+  
+      // Crear la tabla
+      const table = {
+        headers: ['Id', 'Laboratorio'],
+        rows: labData.map(lab => [
+          lab.id,
+          lab.laboratory
+        ])
+      };
+  
+      // Agregar la tabla al documento con un tamaño de letra más pequeño
+      await doc.table(table, { width: 500, prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10), prepareRow: () => doc.font('Helvetica').fontSize(10) });
+      doc.moveDown(2)
+      // Agregar el pie de página
+      const generador = 'Agendador de citas software';
+      const fechaImpresion = new Date().toLocaleString();
+      doc.fontSize(10).text(`Generado por: ${generador}`);
+      doc.fontSize(10).text(`Fecha y hora de impresión: ${fechaImpresion}`, { align: 'right' });
+  
+      // Finalizar el PDF
+      doc.end();
+    } catch (error) {
+      // Manejar errores de solicitud o cualquier otro error
+      console.error(error);
+      res.status(500).send('Error al generar el PDF');
+    }
+  };

@@ -1,11 +1,8 @@
 import fetch from "node-fetch";
-import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import axios from "axios";
 import PDFDocument from "pdfkit-table";
-import fs from "fs";
-
-
+import path from "path";
 
 export const appointment = async(req, res)=>{
     if (req.cookies.ckeib){
@@ -260,44 +257,49 @@ export const pdfGenerate = async (req, res) => {
       res.setHeader('Content-Disposition', 'attachment; filename=reporteCitas.pdf');
       doc.pipe(res);
   
-      // Agregar el logo del proyecto
-    //   const logoHeight = 50;
-    //   const logoWidth = 50;
-    //   const __dirname = path.resolve()
-    //   const imagePath = path.resolve(path.join(__dirname, 'public', 'img', 'logoSena.png')) ;
-  
-    //   const pageWidth = doc.page.width;
-    //   const pageHeight = doc.page.height;
-  
-    //   const logoX = (pageWidth - logoWidth) / 2;
-    //   const logoY = 30;
-  
-    //   doc.image(imagePath, logoX, logoY, { width: logoWidth, height: logoHeight });
-  
-    //   // Agregar espacio después de la imagen
-    //   doc.moveDown(2);
-  
       // Agregar el encabezado
       doc.fontSize(24).text('Reporte de citas', { align: 'center' });
   
       // Agregar espacio después del encabezado
-      doc.moveDown();
+      doc.moveDown(3);
+
+    // Agregar el logo del proyecto
+      const logoHeight = 80;
+      const logoWidth = 80;
+      const __dirname = path.resolve()
+      const imagePath = path.resolve(path.join(__dirname, 'public', 'images', 'logoMundoGenetico.png')) ;
+  
+      const pageWidth = doc.page.width;
+      const pageHeight = doc.page.height;
+  
+      const logoX = 30;
+      const logoY = 100;
+  
+        doc.image(imagePath, logoX, logoY, { width: logoWidth, height: logoHeight });
+  
+      // Agregar espacio después de la imagen
+      doc.moveDown(2);
   
       // Crear la tabla
       const table = {
-        headers: ['Id', 'Nombre', 'Apellido', 'Telefono', 'Direccion'],
+        headers: ['Id', 'Nombre', 'Apellido', 'Telefono', 'Direccion', 'Correo', 'Laboratorio', 'Fecha', 'Hora de la cita', 'Valor de la cita'],
         rows: citaData.map(cita => [
           cita.id,
           cita.nombre,
           cita.apellido,
           cita.telefono,
-          cita.direccion
+          cita.direccion,
+          cita.correo,
+          cita.laboratory,
+          cita.fecha,
+          cita.horaCita,
+          cita.costoCita
         ])
       };
   
       // Agregar la tabla al documento con un tamaño de letra más pequeño
       await doc.table(table, { width: 500, prepareHeader: () => doc.font('Helvetica-Bold').fontSize(10), prepareRow: () => doc.font('Helvetica').fontSize(10) });
-  
+      doc.moveDown(2)
       // Agregar el pie de página
       const generador = 'Agendador de citas software';
       const fechaImpresion = new Date().toLocaleString();

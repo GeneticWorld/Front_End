@@ -65,7 +65,15 @@
             </tr>
             <% }) %>
             
-          </table></div>
+          </table>
+          <form action="generatePdf" method="post">
+            <input type="hidden" name="datos">
+            <label for="formato">Generar reporte</label>
+            <button type="submit">
+                  Generar reporte
+            </button>
+          </form>
+        </div>
         </div>
         <!-- /.box-body -->
     
